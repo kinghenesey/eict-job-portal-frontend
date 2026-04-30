@@ -14,28 +14,36 @@
         <a href="about.html">About</a>
         <a href="admin.html">Admin</a>
     </div>
+
+    <!-- DARK MODE -->
     <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
 
-    <!-- MAIN CONTAINER -->
+    <!-- HERO -->
+    <div class="hero">
+        <h1>About EICT Portal</h1>
+        <p>Meet the team and understand the system behind this platform.</p>
+    </div>
+
+    <!-- MAIN CONTENT -->
     <div class="container">
 
-        <h1>About This Project</h1>
+        <h2>About This Project</h2>
 
         <p>
             The EICT Job Portal is a full-stack web application built to simplify job applications and management.
         </p>
 
-        <!-- FLOATING PROFILE SECTION -->
+        <!-- STATIC INFO GRID -->
         <div class="about-grid">
 
-            <!-- PROFILE CARD -->
+            <!-- PROFILE -->
             <div class="about-card">
                 <img src="your-image.jpg" alt="Developer Image">
                 <h2>Emmanuel King Christopher</h2>
                 <p>Full-Stack Developer (Student Project)</p>
             </div>
 
-            <!-- DETAILS CARD -->
+            <!-- PURPOSE -->
             <div class="about-card">
                 <h2>Project Purpose</h2>
                 <p>
@@ -43,7 +51,7 @@
                 </p>
             </div>
 
-            <!-- TECH CARD -->
+            <!-- TECH -->
             <div class="about-card">
                 <h2>Technologies Used</h2>
                 <ul>
@@ -56,6 +64,10 @@
 
         </div>
 
+        <!-- DYNAMIC TEAM SECTION -->
+        <h2 style="margin-top:40px;">Our Team</h2>
+        <div id="teamContainer" class="about-grid"></div>
+
     </div>
 
     <!-- FOOTER -->
@@ -63,29 +75,55 @@
         <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
     </footer>
 
-<script>
-async function loadTeam() {
-    const res = await fetch("https://eict-job-portal-backend.onrender.com/team");
-    const data = await res.json();
+    <!-- SCRIPT -->
+    <script>
+        // DARK MODE
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
 
-    const container = document.getElementById("team");
-    container.innerHTML = "";
+            if (document.body.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+        }
 
-    data.forEach(member => {
-        const div = document.createElement("div");
-        div.className = "team-card";
+        // LOAD THEME
+        window.addEventListener("load", () => {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark");
+            }
+        });
 
-        div.innerHTML = `
-            <img src="${member.image}" />
-            <h3>${member.name}</h3>
-            <p>${member.role}</p>
-        `;
+        // LOAD TEAM FROM BACKEND
+        async function loadTeam() {
+            try {
+                const res = await fetch("https://eict-job-portal-backend.onrender.com/team");
+                const data = await res.json();
 
-        container.appendChild(div);
-    });
-}
+                const container = document.getElementById("teamContainer");
+                container.innerHTML = "";
 
-loadTeam();
-</script>
+                data.forEach(member => {
+                    const div = document.createElement("div");
+                    div.className = "about-card";
+
+                    div.innerHTML = `
+                        <img src="${member.image}" />
+                        <h3>${member.name}</h3>
+                        <p>${member.role}</p>
+                    `;
+
+                    container.appendChild(div);
+                });
+
+            } catch (err) {
+                console.error("Failed to load team:", err);
+            }
+        }
+
+        loadTeam();
+    </script>
+
 </body>
 </html>
