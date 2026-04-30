@@ -117,19 +117,24 @@ async function addTeam() {
     const role = document.getElementById("teamRole").value;
     const image = document.getElementById("teamImage").value;
 
-    try {
-        await fetch("https://eict-job-portal-backend.onrender.com/team", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name, role, image })
-        });
-
-        alert("Team member added!");
-    } catch (err) {
-        console.error("Team add failed:", err);
+    if (!name || !role || !image) {
+        alert("Please fill all fields");
+        return;
     }
+
+    await fetch("https://eict-job-portal-backend.onrender.com/team", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, role, image })
+    });
+
+    alert("Team member added!");
+
+    document.getElementById("teamName").value = "";
+    document.getElementById("teamRole").value = "";
+    document.getElementById("teamImage").value = "";
 }
 
 // ================= DARK MODE =================
