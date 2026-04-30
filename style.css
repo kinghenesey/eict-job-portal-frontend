@@ -405,3 +405,34 @@ body.dark .nav {
     font-size: 14px;
     color: #333;
 }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stats-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-card h3 {
+    font-size: 14px;
+    color: #555;
+}
+
+.stats-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00b894;
+}

@@ -10,6 +10,8 @@ async function loadApplications() {
         allApplications = data;
         displayApplications(data);
 
+        updateStats(data); // 👈 NEW
+
     } catch (err) {
         console.error("Error loading applications:", err);
     }
@@ -151,7 +153,7 @@ window.addEventListener("load", () => {
 // ================= SEARCH (CLEAN SINGLE VERSION) =================
 document.getElementById("searchInput").addEventListener("input", function () {
     const value = this.value.toLowerCase();
-        
+
 
     const filtered = allApplications.filter(app =>
         app.name.toLowerCase().includes(value)
@@ -159,6 +161,19 @@ document.getElementById("searchInput").addEventListener("input", function () {
 
     displayApplications(filtered);
 });
+
+function updateStats(data) {
+    const total = data.length;
+
+    const frontend = data.filter(app => app.position.toLowerCase().includes("frontend")).length;
+    const backend = data.filter(app => app.position.toLowerCase().includes("backend")).length;
+    const fullstack = data.filter(app => app.position.toLowerCase().includes("full")).length;
+
+    document.getElementById("totalApps").innerText = total;
+    document.getElementById("frontendCount").innerText = frontend;
+    document.getElementById("backendCount").innerText = backend;
+    document.getElementById("fullstackCount").innerText = fullstack;
+}
 
 // ================= INITIAL LOAD =================
 loadApplications();
