@@ -7,33 +7,46 @@
 
 <body>
 
-    <!-- NAV -->
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="admin.html">Admin</a>
+    <!-- SIDEBAR + MAIN LAYOUT WRAPPER -->
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <h2>EICT Admin</h2>
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="admin.html" class="active">Applications</a>
+
+            <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+
+            <h1>All Job Applications</h1>
+
+            <!-- TEAM SECTION -->
+            <h2>Add Team Member</h2>
+
+            <input id="teamName" placeholder="Name">
+            <input id="teamRole" placeholder="Role">
+            <input id="teamImage" placeholder="Image URL">
+
+            <button onclick="addTeam()">Add</button>
+
+            <!-- SEARCH -->
+            <input type="text" id="searchInput" placeholder="Search by name...">
+
+            <!-- APPLICATIONS -->
+            <div id="applications"></div>
+
+        </div>
+
     </div>
-    <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
 
-    <h1>All Job Applications</h1>
-    <h2>Add Team Member</h2>
-
-    <input id="teamName" placeholder="Name">
-    <input id="teamRole" placeholder="Role">
-    <input id="teamImage" placeholder="Image URL">
-
-    <button onclick="addTeam()">Add</button>
-
-    <!-- LOGOUT -->
-    <button onclick="logout()">Logout</button>
-
-    <div class="container">
-        <input type="text" id="searchInput" placeholder="Search by name...">
-    </div>
-
-    <!-- APPLICATIONS LIST -->
-    <div id="applications"></div>
-
+    <!-- EDIT MODAL -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>Edit Application</h2>
@@ -47,6 +60,7 @@
         </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script src="admin.js"></script>
 
     <script>
@@ -55,14 +69,17 @@
             window.location.href = "login.html";
         }
 
-        // 🚪 LOGOUT FUNCTION
+        // 🚪 LOGOUT
         function logout() {
             localStorage.removeItem("auth");
             window.location.href = "login.html";
         }
     </script>
-<footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
-    <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
-</footer>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
+        <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
+    </footer>
+
 </body>
 </html>

@@ -1,12 +1,13 @@
 let allApplications = [];
+let currentEditId = null;
 
-// LOAD DATA FROM BACKEND
+// ================= LOAD APPLICATIONS =================
 async function loadApplications() {
     try {
         const response = await fetch("https://eict-job-portal-backend.onrender.com/applications");
         const data = await response.json();
 
-        allApplications = data; // store for search
+        allApplications = data;
         displayApplications(data);
 
     } catch (err) {
@@ -14,7 +15,7 @@ async function loadApplications() {
     }
 }
 
-// DISPLAY DATA (REUSABLE)
+// ================= DISPLAY =================
 function displayApplications(data) {
     const container = document.getElementById("applications");
     container.innerHTML = "";
@@ -37,14 +38,13 @@ function displayApplications(data) {
     });
 }
 
-// DELETE FUNCTION
+// ================= DELETE =================
 async function deleteApplication(id) {
     try {
         await fetch(`https://eict-job-portal-backend.onrender.com/applications/${id}`, {
             method: "DELETE"
         });
 
-        // reload after delete
         loadApplications();
 
     } catch (err) {
@@ -52,19 +52,7 @@ async function deleteApplication(id) {
     }
 }
 
-// SEARCH FUNCTION
-document.getElementById("searchInput").addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-
-    const filtered = allApplications.filter(app =>
-        app.name.toLowerCase().includes(value)
-    );
-
-    displayApplications(filtered);
-});
-
-let currentEditId = null;
-
+// ================= EDIT =================
 function editApplication(id, name, email, position) {
     currentEditId = id;
 
@@ -75,6 +63,7 @@ function editApplication(id, name, email, position) {
     document.getElementById("editModal").style.display = "flex";
 }
 
+// ================= SAVE EDIT =================
 async function saveEdit() {
     const name = document.getElementById("editName").value;
     const email = document.getElementById("editEmail").value;
@@ -97,10 +86,12 @@ async function saveEdit() {
     }
 }
 
+// ================= CLOSE MODAL =================
 function closeModal() {
     document.getElementById("editModal").style.display = "none";
 }
 
+// ================= UPDATE (OPTIONAL LEGACY FUNCTION) =================
 async function updateApplication(id, name, email, position) {
     try {
         await fetch(`https://eict-job-portal-backend.onrender.com/applications/${id}`, {
@@ -118,22 +109,28 @@ async function updateApplication(id, name, email, position) {
     }
 }
 
+// ================= TEAM MEMBER =================
 async function addTeam() {
     const name = document.getElementById("teamName").value;
     const role = document.getElementById("teamRole").value;
     const image = document.getElementById("teamImage").value;
 
-    await fetch("https://eict-job-portal-backend.onrender.com/team", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, role, image })
-    });
+    try {
+        await fetch("https://eict-job-portal-backend.onrender.com/team", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, role, image })
+        });
 
-    alert("Team member added!");
+        alert("Team member added!");
+    } catch (err) {
+        console.error("Team add failed:", err);
+    }
 }
 
+// ================= DARK MODE =================
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
 
@@ -144,12 +141,24 @@ function toggleDarkMode() {
     }
 }
 
-// load saved theme
-window.onload = () => {
+// ================= THEME LOAD =================
+window.addEventListener("load", () => {
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
     }
-};
+});
 
-// INITIAL LOAD
+// ================= SEARCH (CLEAN SINGLE VERSION) =================
+document.getElementById("searchInput").addEventListener("input", function () {
+    const value = this.value.toLowerCase();
+        
+
+    const filtered = allApplications.filter(app =>
+        app.name.toLowerCase().includes(value)
+    );
+
+    displayApplications(filtered);
+});
+
+// ================= INITIAL LOAD =================
 loadApplications();
