@@ -137,6 +137,13 @@ async function addTeam() {
     document.getElementById("teamImage").value = "";
 }
 
+async function loadMessages() {
+    const res = await fetch("https://eict-job-portal-backend.onrender.com/contact");
+    const data = await res.json();
+
+    console.log(data);
+}
+
 // ================= DARK MODE =================
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
