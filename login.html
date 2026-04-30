@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Login</h2>
+
+    <input type="text" id="username" placeholder="Username"><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+
+    <button onclick="login()">Login</button>
+
+    <p id="error" style="color:red;"></p>
+</div>
+
+<script>
+function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    // simple hardcoded login (for school project)
+    if(user === "admin" && pass === "1234") {
+        localStorage.setItem("auth", "true");
+        window.location.href = "admin.html";
+    } else {
+        document.getElementById("error").innerText = "Invalid login";
+    }
+}
+</script>
+<footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
+    <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
+</footer>
+</body>
+</html>

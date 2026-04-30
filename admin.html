@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="admin.html">Admin</a>
+    </div>
+
+    <h1>All Job Applications</h1>
+
+    <!-- LOGOUT -->
+    <button onclick="logout()">Logout</button>
+
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Search by name...">
+    </div>
+
+    <!-- APPLICATIONS LIST -->
+    <div id="applications"></div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Application</h2>
+
+            <input type="text" id="editName" placeholder="Name">
+            <input type="email" id="editEmail" placeholder="Email">
+            <input type="text" id="editPosition" placeholder="Position">
+
+            <button onclick="saveEdit()">Save</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+
+    <script>
+        // 🔐 PROTECT PAGE
+        if (localStorage.getItem("auth") !== "true") {
+            window.location.href = "login.html";
+        }
+
+        // 🚪 LOGOUT FUNCTION
+        function logout() {
+            localStorage.removeItem("auth");
+            window.location.href = "login.html";
+        }
+    </script>
+<footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
+    <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
+</footer>
+</body>
+</html>

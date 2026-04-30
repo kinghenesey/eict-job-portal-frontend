@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EICT Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="admin.html">Admin</a>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>EICT Job Application Portal</h1>
+        <p>Apply for your dream job easily and manage applications efficiently.</p>
+
+        <a href="#apply" class="btn">Apply Now</a>
+    </div>
+
+    <!-- FORM -->
+    <div class="container" id="apply">
+        <h2>Job Application Form</h2>
+
+        <form id="jobForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="position" placeholder="Position" required>
+
+            <button type="submit">Submit Application</button>
+            <p id="loading" style="display:none; color:blue;">Submitting application...</p>
+        </form>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- SCRIPT -->
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        document.getElementById("jobForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const loading = document.getElementById("loading");
+            loading.style.display = "block";
+
+            const button = this.querySelector("button");
+            button.disabled = true;
+
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                position: document.getElementById("position").value
+            };
+
+            try {
+                await fetch("https://eict-job-portal-backend.onrender.com/apply", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                showToast("Application submitted successfully ✅");
+
+                this.reset();
+
+                } catch (err) {
+                    showToast("Error submitting application ❌");
+                }
+            
+
+            loading.style.display = "none";
+            button.disabled = false;
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
+        <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
+    </footer>
+
+</body>
+</html>
