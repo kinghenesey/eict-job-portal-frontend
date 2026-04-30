@@ -12,7 +12,12 @@ body {
 
 * {
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
+
+/* =====================
+   ANIMATIONS
+===================== */
 
 @keyframes pageLoad {
     from {
@@ -55,7 +60,6 @@ body {
 
 .nav a:hover {
     color: #00b894;
-    transform: translateY(-2px);
 }
 
 /* =====================
@@ -67,13 +71,10 @@ body {
     padding: 110px 20px;
     background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
     color: white;
-    position: relative;
-    overflow: hidden;
 }
 
 .hero h1 {
     font-size: 42px;
-    margin-bottom: 10px;
 }
 
 .hero p {
@@ -104,25 +105,6 @@ body {
     transform: translateY(-6px);
 }
 
-/* HERO STATS */
-
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.hero-stat {
-    text-align: center;
-}
-
-.hero-stat h2 {
-    font-size: 28px;
-    color: #00b894;
-}
-
 /* =====================
    BUTTONS
 ===================== */
@@ -141,16 +123,6 @@ body {
 .btn:hover {
     background: #019875;
     transform: scale(1.05);
-}
-
-.btn.secondary {
-    background: transparent;
-    border: 2px solid #00b894;
-    color: white;
-}
-
-.btn.secondary:hover {
-    background: #00b894;
 }
 
 /* =====================
@@ -244,28 +216,6 @@ button:hover {
 }
 
 /* =====================
-   ADMIN DASHBOARD
-===================== */
-
-#applications {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-#applications div {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-
-#applications div:hover {
-    transform: translateY(-8px);
-}
-
-/* =====================
    SEARCH
 ===================== */
 
@@ -350,6 +300,62 @@ button:hover {
 }
 
 /* =====================
+   ADMIN DASHBOARD (ISOLATED FIX)
+===================== */
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 230px;
+    background: #111;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.sidebar a:hover,
+.sidebar .active {
+    background: #00b894;
+}
+
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+/* APPLICATIONS */
+
+#applications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#applications div {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+#applications div:hover {
+    transform: translateY(-8px);
+}
+
+/* =====================
    DARK MODE
 ===================== */
 
@@ -361,8 +367,8 @@ body.dark {
 body.dark .container,
 body.dark .card,
 body.dark .about-card,
-body.dark #applications div,
-body.dark .career-card {
+body.dark .career-card,
+body.dark #applications div {
     background: #1e293b;
     color: #e5e7eb;
 }
@@ -399,7 +405,8 @@ body.dark .nav {
         grid-template-columns: 1fr;
     }
 
-    .about-grid {
+    .about-grid,
+    .career-grid {
         grid-template-columns: 1fr;
     }
 }
