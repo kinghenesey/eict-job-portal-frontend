@@ -118,5 +118,21 @@ async function updateApplication(id, name, email, position) {
     }
 }
 
+async function addTeam() {
+    const name = document.getElementById("teamName").value;
+    const role = document.getElementById("teamRole").value;
+    const image = document.getElementById("teamImage").value;
+
+    await fetch("https://eict-job-portal-backend.onrender.com/team", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, role, image })
+    });
+
+    alert("Team member added!");
+}
+
 // INITIAL LOAD
 loadApplications();
