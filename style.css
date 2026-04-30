@@ -418,3 +418,11 @@ body.dark .nav {
 button, .btn {
     min-height: 44px;
 }
+
+.about-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00b894;
+}
