@@ -46,81 +46,77 @@
         <a href="#apply" class="btn">Apply Now</a>
     </div>
 
-    <!-- CAREER POSITIONS SECTION -->
+    <!-- CAREER POSITIONS -->
     <div class="container">
 
         <h2>Available Career Paths</h2>
-        <p>Understand what each role does and the skills required from beginner to senior level.</p>
+        <p>Understand roles from beginner to senior level.</p>
 
         <div class="career-grid">
 
-            <!-- FRONTEND -->
             <div class="career-card">
                 <h3>Frontend Developer</h3>
-                <p><strong>Role:</strong> Builds user interfaces and website layouts</p>
+                <p><strong>Role:</strong> Builds UI interfaces</p>
 
                 <h4>Beginner:</h4>
-                <p>HTML, CSS, basic JavaScript</p>
+                <p>HTML, CSS, JavaScript</p>
 
                 <h4>Intermediate:</h4>
-                <p>React, API integration, responsive design</p>
+                <p>React, APIs, responsiveness</p>
 
                 <h4>Senior:</h4>
-                <p>Performance optimization, architecture design, UI systems</p>
+                <p>Architecture, performance optimization</p>
 
                 <h4>Requirements:</h4>
-                <p>Portfolio projects + GitHub profile</p>
+                <p>Portfolio + GitHub</p>
             </div>
 
-            <!-- BACKEND -->
             <div class="career-card">
                 <h3>Backend Developer</h3>
-                <p><strong>Role:</strong> Handles server logic, databases, and APIs</p>
+                <p><strong>Role:</strong> Server & database logic</p>
 
                 <h4>Beginner:</h4>
-                <p>Node.js, Express basics</p>
+                <p>Node.js basics</p>
 
                 <h4>Intermediate:</h4>
-                <p>MongoDB, authentication, REST APIs</p>
+                <p>MongoDB, APIs</p>
 
                 <h4>Senior:</h4>
-                <p>System design, scaling, security architecture</p>
+                <p>System design & scaling</p>
 
                 <h4>Requirements:</h4>
-                <p>Strong logic + backend projects</p>
+                <p>Backend projects</p>
             </div>
 
-            <!-- FULL STACK -->
             <div class="career-card">
                 <h3>Full-Stack Developer</h3>
-                <p><strong>Role:</strong> Works on both frontend and backend systems</p>
+                <p><strong>Role:</strong> Frontend + Backend</p>
 
                 <h4>Beginner:</h4>
-                <p>HTML, CSS, JavaScript basics</p>
+                <p>HTML, CSS, JS</p>
 
                 <h4>Intermediate:</h4>
-                <p>Frontend + backend integration</p>
+                <p>API integration</p>
 
                 <h4>Senior:</h4>
-                <p>Full system architecture + deployment</p>
+                <p>Full system architecture</p>
 
                 <h4>Requirements:</h4>
-                <p>Full-stack projects + deployment experience</p>
+                <p>Full-stack projects</p>
             </div>
 
-            <!-- UI/UX -->
             <div class="career-card">
                 <h3>UI/UX Designer</h3>
-                <p><strong>Role:</strong> Designs user experience and interfaces</p>
+                <p><strong>Role:</strong> Product design</p>
 
                 <h4>Beginner:</h4>
-                <p>Figma basics, color theory</p>
+                <p>Figma basics</p>
 
                 <h4>Intermediate:</h4>
-                <p>Prototyping, wireframes, user flow</p>
+                <p>Wireframes</p>
 
                 <h4>Senior:</h4>
-                <p>Product design, UX strategy, user research</p>
+                <p>User experience strategy</p>
 
                 <h4>Requirements:</h4>
                 <p>Design portfolio</p>
@@ -160,13 +156,17 @@
             }
         }
 
-        // apply saved theme + loader
+        // ================= PAGE INIT =================
         window.addEventListener("load", () => {
+
+            // theme restore
             if (localStorage.getItem("theme") === "dark") {
                 document.body.classList.add("dark");
             }
 
-            document.getElementById("loader").style.display = "none";
+            // hide loader
+            const loader = document.getElementById("loader");
+            if (loader) loader.style.display = "none";
         });
 
         // ================= TOAST =================
