@@ -8,22 +8,25 @@
 
 <body>
 
+    <!-- LOADER -->
+    <div id="loader"></div>
+
     <!-- NAV -->
     <div class="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="admin.html">Admin</a>
     </div>
-    <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
 
-    <div id="loader"></div>
+    <!-- DARK MODE TOGGLE -->
+    <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
 
     <!-- HERO -->
     <div class="hero">
         <h1>Welcome to EICT Job Portal</h1>
         <p>Your gateway to career opportunities and talent discovery.</p>
 
-         <div class="hero-cards">
+        <div class="hero-cards">
             <div class="card">
                 <h3>Apply for Jobs</h3>
                 <p>Submit your application quickly and easily.</p>
@@ -62,6 +65,7 @@
 
     <!-- SCRIPT -->
     <script>
+        // ================= DARK MODE =================
         function toggleDarkMode() {
             document.body.classList.toggle("dark");
 
@@ -72,13 +76,16 @@
             }
         }
 
-        // load saved theme
-        window.onload = () => {
+        // apply saved theme + loader
+        window.addEventListener("load", () => {
             if (localStorage.getItem("theme") === "dark") {
                 document.body.classList.add("dark");
             }
-        };
 
+            document.getElementById("loader").style.display = "none";
+        });
+
+        // ================= TOAST =================
         function showToast(message) {
             const toast = document.getElementById("toast");
             toast.innerText = message;
@@ -89,13 +96,14 @@
             }, 3000);
         }
 
+        // ================= FORM SUBMIT =================
         document.getElementById("jobForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
             const loading = document.getElementById("loading");
-            loading.style.display = "block";
-
             const button = this.querySelector("button");
+
+            loading.style.display = "block";
             button.disabled = true;
 
             const data = {
@@ -114,18 +122,13 @@
                 });
 
                 showToast("Application submitted successfully ✅");
-
                 this.reset();
 
-                } catch (err) {
-                    showToast("Error submitting application ❌");
-                }
-            
+            } catch (err) {
+                showToast("Error submitting application ❌");
+            }
 
             loading.style.display = "none";
-            window.addEventListener("load", () => {
-                document.getElementById("loader").style.display = "none";
-            });
             button.disabled = false;
         });
     </script>
