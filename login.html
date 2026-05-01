@@ -20,8 +20,8 @@
 
 <script>
 async function login() {
-    const usernameInput = document.getElementById("username").value;
-    const passwordInput = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
     const error = document.getElementById("error");
 
     error.innerText = "";
@@ -32,26 +32,20 @@ async function login() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username: usernameInput,
-                password: passwordInput
-            })
+            body: JSON.stringify({ username, password })
         });
 
         const data = await res.json();
 
-        console.log("LOGIN RESPONSE:", data); // 🔥 DEBUG LINE
-
-        if (res.ok && data.token) {
-            localStorage.setItem("token", data.token);
+        if (data.success) {
+            localStorage.setItem("admin", "true");
             window.location.href = "admin.html";
         } else {
-            error.innerText = data.message || "Invalid login";
+            error.innerText = "Invalid login";
         }
 
-    } catch (err) {
-        console.error(err);
-        error.innerText = "Server error. Check console.";
+    } catch {
+        error.innerText = "Server error";
     }
 }
 </script>

@@ -17,6 +17,7 @@
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="admin.html" class="active">Applications</a>
+            <a href="apply.html">Apply</a>
 
             <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
             <button onclick="logout()">Logout</button>
@@ -112,13 +113,13 @@
 
     <script>
         // 🔐 PROTECT PAGE
-        if (!localStorage.getItem("token")) {
+        if (localStorage.getItem("admin") !== "true") {
             window.location.href = "login.html";
         }
 
         // 🚪 LOGOUT
         function logout() {
-            localStorage.removeItem("token");
+            localStorage.removeItem("admin");
             window.location.href = "login.html";
         }
     </script>
