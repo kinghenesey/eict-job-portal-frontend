@@ -24,7 +24,7 @@ async function login() {
     const passwordInput = document.getElementById("password").value;
     const error = document.getElementById("error");
 
-    error.innerText = ""; // clear previous error
+    error.innerText = "";
 
     try {
         const res = await fetch("https://eict-job-portal-backend.onrender.com/admin/login", {
@@ -40,15 +40,18 @@ async function login() {
 
         const data = await res.json();
 
-        if (data.token) {
+        console.log("LOGIN RESPONSE:", data); // 🔥 DEBUG LINE
+
+        if (res.ok && data.token) {
             localStorage.setItem("token", data.token);
             window.location.href = "admin.html";
         } else {
-            error.innerText = "Invalid username or password";
+            error.innerText = data.message || "Invalid login";
         }
 
     } catch (err) {
-        error.innerText = "Server error. Try again.";
+        console.error(err);
+        error.innerText = "Server error. Check console.";
     }
 }
 </script>
