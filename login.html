@@ -19,21 +19,43 @@
 </div>
 
 <script>
-function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+async function login() {
+    const usernameInput = document.getElementById("username").value;
+    const passwordInput = document.getElementById("password").value;
+    const error = document.getElementById("error");
 
-    // simple hardcoded login (for school project)
-    if(user === "admin" && pass === "1234") {
-        localStorage.setItem("auth", "true");
-        window.location.href = "admin.html";
-    } else {
-        document.getElementById("error").innerText = "Invalid login";
+    error.innerText = ""; // clear previous error
+
+    try {
+        const res = await fetch("https://eict-job-portal-backend.onrender.com/admin/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: usernameInput,
+                password: passwordInput
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+            window.location.href = "admin.html";
+        } else {
+            error.innerText = "Invalid username or password";
+        }
+
+    } catch (err) {
+        error.innerText = "Server error. Try again.";
     }
 }
 </script>
+
 <footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
     <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
 </footer>
+
 </body>
 </html>

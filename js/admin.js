@@ -1,16 +1,38 @@
 let allApplications = [];
 let currentEditId = null;
 
+const BASE_URL = "https://eict-job-portal-backend.onrender.com";
+
+// ================= AUTH TOKEN =================
+function getToken() {
+    return localStorage.getItem("token");
+}
+
+// ================= PROTECT PAGE =================
+function checkAuth() {
+    const token = getToken();
+    if (!token) {
+        alert("Please login first ❌");
+        window.location.href = "login.html";
+    }
+}
+
 // ================= LOAD APPLICATIONS =================
 async function loadApplications() {
+    checkAuth();
+
     try {
-        const response = await fetch("https://eict-job-portal-backend.onrender.com/applications");
+        const response = await fetch(`${BASE_URL}/applications`, {
+            headers: {
+                "Authorization": "Bearer " + getToken()
+            }
+        });
+
         const data = await response.json();
 
         allApplications = data;
         displayApplications(data);
-
-        updateStats(data); // 👈 NEW
+        updateStats(data);
 
     } catch (err) {
         console.error("Error loading applications:", err);
@@ -43,8 +65,11 @@ function displayApplications(data) {
 // ================= DELETE =================
 async function deleteApplication(id) {
     try {
-        await fetch(`https://eict-job-portal-backend.onrender.com/applications/${id}`, {
-            method: "DELETE"
+        await fetch(`${BASE_URL}/applications/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + getToken()
+            }
         });
 
         loadApplications();
@@ -72,10 +97,11 @@ async function saveEdit() {
     const position = document.getElementById("editPosition").value;
 
     try {
-        await fetch(`https://eict-job-portal-backend.onrender.com/applications/${currentEditId}`, {
+        await fetch(`${BASE_URL}/applications/${currentEditId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + getToken()
             },
             body: JSON.stringify({ name, email, position })
         });
@@ -93,13 +119,14 @@ function closeModal() {
     document.getElementById("editModal").style.display = "none";
 }
 
-// ================= UPDATE (OPTIONAL LEGACY FUNCTION) =================
+// ================= LEGACY UPDATE =================
 async function updateApplication(id, name, email, position) {
     try {
-        await fetch(`https://eict-job-portal-backend.onrender.com/applications/${id}`, {
+        await fetch(`${BASE_URL}/applications/${id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + getToken()
             },
             body: JSON.stringify({ name, email, position })
         });
@@ -122,26 +149,42 @@ async function addTeam() {
         return;
     }
 
-    await fetch("https://eict-job-portal-backend.onrender.com/team", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, role, image })
-    });
+    try {
+        await fetch(`${BASE_URL}/team`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + getToken()
+            },
+            body: JSON.stringify({ name, role, image })
+        });
 
-    alert("Team member added!");
+        alert("Team member added!");
 
-    document.getElementById("teamName").value = "";
-    document.getElementById("teamRole").value = "";
-    document.getElementById("teamImage").value = "";
+        document.getElementById("teamName").value = "";
+        document.getElementById("teamRole").value = "";
+        document.getElementById("teamImage").value = "";
+
+    } catch (err) {
+        console.error("Failed to add team:", err);
+    }
 }
 
+// ================= CONTACT (OPTIONAL) =================
 async function loadMessages() {
-    const res = await fetch("https://eict-job-portal-backend.onrender.com/contact");
-    const data = await res.json();
+    try {
+        const res = await fetch(`${BASE_URL}/contact`, {
+            headers: {
+                "Authorization": "Bearer " + getToken()
+            }
+        });
 
-    console.log(data);
+        const data = await res.json();
+        console.log(data);
+
+    } catch (err) {
+        console.error("Failed to load messages:", err);
+    }
 }
 
 // ================= DARK MODE =================
@@ -160,12 +203,13 @@ window.addEventListener("load", () => {
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
     }
+
+    checkAuth(); // 👈 protect page
 });
 
-// ================= SEARCH (CLEAN SINGLE VERSION) =================
+// ================= SEARCH =================
 document.getElementById("searchInput").addEventListener("input", function () {
     const value = this.value.toLowerCase();
-
 
     const filtered = allApplications.filter(app =>
         app.name.toLowerCase().includes(value)
@@ -174,6 +218,7 @@ document.getElementById("searchInput").addEventListener("input", function () {
     displayApplications(filtered);
 });
 
+// ================= STATS =================
 function updateStats(data) {
     const total = data.length;
 

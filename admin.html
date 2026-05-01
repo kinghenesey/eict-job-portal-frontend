@@ -25,53 +25,75 @@
         <!-- MAIN CONTENT -->
         <div class="main">
 
-            <h1>All Job Applications</h1>
-
-            <!-- TEAM SECTION -->
-            <h2>Add Team Member</h2>
-
-            <input id="teamName" placeholder="Name">
-            <input id="teamRole" placeholder="Role">
-            <input id="teamImage" placeholder="Image URL">
-
-            <button onclick="addTeam()">Add</button>
-
-            <!-- SEARCH -->
-            <input type="text" id="searchInput" placeholder="Search by name...">
-
-            <!-- DASHBOARD STATS -->
-            <div class="stats-grid">
-
-                <div class="stats-card">
-                    <h3>Total Applications</h3>
-                    <p id="totalApps">0</p>
-                </div>
-
-                <div class="stats-card">
-                    <h3>Frontend</h3>
-                    <p id="frontendCount">0</p>
-                </div>
-
-                <div class="stats-card">
-                    <h3>Backend</h3>
-                    <p id="backendCount">0</p>
-                </div>
-
-                <div class="stats-card">
-                    <h3>Full Stack</h3>
-                    <p id="fullstackCount">0</p>
-                </div>
-
+            <!-- HEADER -->
+            <div class="dashboard-header">
+                <h1>All Job Applications</h1>
+                <p>Manage applicants, track stats, and control your system.</p>
             </div>
 
-            <!-- APPLICATIONS -->
-            <div id="applications"></div>
+            <!-- ================= TEAM SECTION ================= -->
+            <div class="section">
+                <h2>Add Team Member</h2>
+
+                <div class="form-group">
+                    <input id="teamName" placeholder="Name">
+                    <input id="teamRole" placeholder="Role">
+                    <input id="teamImage" placeholder="Image URL">
+                </div>
+
+                <button onclick="addTeam()">Add Team Member</button>
+            </div>
+
+            <!-- ================= SEARCH ================= -->
+            <div class="section">
+                <input type="text" id="searchInput" placeholder="Search by name...">
+            </div>
+
+            <!-- ================= DASHBOARD STATS ================= -->
+            <div class="section">
+                <div class="stats-grid">
+
+                    <div class="stats-card">
+                        <h3>Total Applications</h3>
+                        <p id="totalApps">0</p>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Frontend</h3>
+                        <p id="frontendCount">0</p>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Backend</h3>
+                        <p id="backendCount">0</p>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Full Stack</h3>
+                        <p id="fullstackCount">0</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= APPLICATIONS ================= -->
+            <div class="section">
+                <h2>Applications List</h2>
+                <div id="applications"></div>
+            </div>
+
+            <!-- ================= FUTURE: CONTACT DASHBOARD ================= -->
+            <!-- (You’ll plug this later when we build inbox UI) -->
+            <div class="section" id="contactSection" style="display:none;">
+                <h2>Contact Messages</h2>
+                <div id="messages"></div>
+            </div>
 
         </div>
 
     </div>
 
-    <!-- EDIT MODAL -->
+    <!-- ================= EDIT MODAL ================= -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>Edit Application</h2>
@@ -85,23 +107,23 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- ================= SCRIPTS ================= -->
     <script src="admin.js"></script>
 
     <script>
         // 🔐 PROTECT PAGE
-        if (localStorage.getItem("auth") !== "true") {
+        if (!localStorage.getItem("token")) {
             window.location.href = "login.html";
         }
 
         // 🚪 LOGOUT
         function logout() {
-            localStorage.removeItem("auth");
+            localStorage.removeItem("token");
             window.location.href = "login.html";
         }
     </script>
 
-    <!-- FOOTER -->
+    <!-- ================= FOOTER ================= -->
     <footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
         <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
     </footer>
