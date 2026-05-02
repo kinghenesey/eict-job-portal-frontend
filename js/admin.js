@@ -170,20 +170,45 @@ async function addTeam() {
     }
 }
 
-// ================= CONTACT (OPTIONAL) =================
+// ================= LOAD CONTACT MESSAGES =================
 async function loadMessages() {
     try {
-        const res = await fetch(`${BASE_URL}/contact`, {
-            headers: {
-                "Authorization": "Bearer " + getToken()
-            }
+        const res = await fetch("https://eict-job-portal-backend.onrender.com/contact");
+        const data = await res.json();
+
+        const container = document.getElementById("messages");
+        container.innerHTML = "";
+
+        data.forEach(msg => {
+            const div = document.createElement("div");
+
+            div.innerHTML = `
+                <p><strong>Name:</strong> ${msg.name}</p>
+                <p><strong>Email:</strong> ${msg.email}</p>
+                <p><strong>Message:</strong> ${msg.message}</p>
+
+                <button onclick="deleteMessage('${msg._id}')">Delete</button>
+            `;
+
+            container.appendChild(div);
         });
 
-        const data = await res.json();
-        console.log(data);
+    } catch (err) {
+        console.error("Error loading messages:", err);
+    }
+}
+
+// ================= DELETE MESSAGE =================
+async function deleteMessage(id) {
+    try {
+        await fetch(`https://eict-job-portal-backend.onrender.com/contact/${id}`, {
+            method: "DELETE"
+        });
+
+        loadMessages();
 
     } catch (err) {
-        console.error("Failed to load messages:", err);
+        console.error("Delete failed:", err);
     }
 }
 
@@ -234,3 +259,4 @@ function updateStats(data) {
 
 // ================= INITIAL LOAD =================
 loadApplications();
+loadMessages(); // 👈 ADD THIS

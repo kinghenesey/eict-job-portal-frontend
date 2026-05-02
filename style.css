@@ -435,6 +435,19 @@ p {
     color: var(--muted);
 }
 
+#messages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#messages div {
+    background: rgba(17, 34, 64, 0.65);
+    padding: 15px;
+    border-radius: 12px;
+}
+
 /* =====================
    RESPONSIVE
 ===================== */
