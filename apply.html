@@ -1,8 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply - EICT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+    <h2 class="logo">EICT</h2>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="apply.html">Apply</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin.html">Admin</a>
+        <a href="about.html">About</a>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Apply for a Role</h1>
+    <p>Take the next step in your tech career with EICT</p>
+</div>
+
+<!-- FORM SECTION -->
 <div class="container">
 
     <div class="section">
-        <h2>Apply for a Position</h2>
-        <p>Fill the form below to join our team.</p>
+        <h2>Job Application</h2>
+        <p>Fill in your details carefully</p>
 
         <form id="jobForm">
 
@@ -12,7 +45,7 @@
             </div>
 
             <div class="form-group">
-                <label>Email Address</label>
+                <label>Email</label>
                 <input type="email" id="email" required>
             </div>
 
@@ -27,8 +60,82 @@
             </div>
 
             <button type="submit" class="btn">Submit Application</button>
+            <p id="loading" style="display:none;">Submitting...</p>
 
         </form>
     </div>
 
 </div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+}
+
+window.addEventListener("load", () => {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+    }
+});
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+document.getElementById("jobForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const loading = document.getElementById("loading");
+    loading.style.display = "block";
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        position: document.getElementById("position").value
+    };
+
+    try {
+        await fetch("https://eict-job-portal-backend.onrender.com/apply", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        showToast("Application submitted successfully ✅");
+        this.reset();
+
+    } catch {
+        showToast("Error submitting application ❌");
+    }
+
+    loading.style.display = "none";
+});
+</script>
+
+<footer style="text-align:center; padding:20px; margin-top:40px; background:#0a192f; color:white;">
+    <p>© 2026 EICT Job Portal</p>
+</footer>
+
+</body>
+</html>
