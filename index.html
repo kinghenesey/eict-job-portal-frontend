@@ -8,271 +8,221 @@
 
 <body>
 
-    <!-- LOADER -->
-    <div id="loader"></div>
+<!-- LOADER -->
+<div id="loader"></div>
 
-    <!-- NAV -->
-    <div class="nav">
+<!-- NAV -->
+<div class="nav">
+    <h2 class="logo">EICT</h2>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="admin.html">Admin</a>
         <a href="apply.html">Apply</a>
         <a href="contact.html">Contact</a>
+        <a href="admin.html">Admin</a>
+        <a href="about.html">About</a>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
     </div>
+</div>
 
-    <!-- DARK MODE TOGGLE -->
-    <button onclick="toggleDarkMode()" id="darkBtn">🌙</button>
+<!-- HERO -->
+<div class="hero">
+    <h1>Welcome to EICT Job Portal</h1>
+    <p>Your gateway to modern job opportunities, career growth, and talent discovery.</p>
 
-    <!-- HERO -->
-    <div class="hero">
-        <h1>Welcome to EICT Job Portal</h1>
-        <p>Your gateway to modern job opportunities, career growth, and talent discovery.</p>
-
-        <div class="hero-cards">
-            <div class="card">
-                <h3>Apply for Jobs</h3>
-                <p>Submit your application quickly and easily.</p>
-            </div>
-
-        <div class="stats">
-            <div class="stat-box">
-                <h2>500+</h2>
-                <p>Applications</p>
-            </div>
-
-            <div class="stat-box">
-                <h2>20+</h2>
-                <p>Job Roles</p>
-            </div>
-
-            <div class="stat-box">
-                <h2>100%</h2>
-                <p>Free Access</p>
-            </div>
-        </div>
-
-        <div class="container">
-            <h2>Why Use EICT Portal?</h2>
-
-            <div class="features-grid">
-
-                <div class="feature-card">
-                    <h3>Fast Applications</h3>
-                    <p>Apply for jobs in under 1 minute.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Real-Time Tracking</h3>
-                    <p>See application status instantly.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Admin Control</h3>
-                    <p>Efficient hiring management system.</p>
-                </div>
-            </div>
+    <div class="hero-cards">
+        <div class="card">
+            <h3>Apply for Jobs</h3>
+            <p>Submit your application quickly and easily.</p>
         </div>
 
         <div class="card">
             <h3>Track Opportunities</h3>
+            <p>Stay updated with available positions.</p>
+        </div>
+
+        <div class="card">
+            <h3>Admin Dashboard</h3>
+            <p>Manage applicants efficiently.</p>
         </div>
     </div>
 
-    <div class="stat-box">
-        <h2>100%</h2>
-        <p>Free Access</p>
+    <div class="stats">
+        <div class="stat-box">
+            <h2>500+</h2>
+            <p>Applications</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>50+</h2>
+            <p>Positions</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>100%</h2>
+            <p>Digital Hiring</p>
+        </div>
+    </div>
+
+    <a href="#apply" class="btn">Apply Now</a>
+</div>
+
+<!-- WHY SECTION -->
+<div class="container">
+    <div class="section">
+        <h2>Why Use EICT Portal?</h2>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Fast Applications</h3>
+            <p>Apply for jobs in under 1 minute.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Real-Time Tracking</h3>
+            <p>See application status instantly.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Admin Control</h3>
+            <p>Efficient hiring management system.</p>
+        </div>
     </div>
 </div>
 
-            <div class="card">
-                <h3>Track Opportunities</h3>
-                <p>Stay updated with available positions.</p>
-            </div>
-
-            <div class="card">
-                <h3>Admin Dashboard</h3>
-                <p>Manage applicants efficiently.</p>
-            </div>
-        </div>
-
-        <a href="#apply" class="btn">Apply Now</a>
-    </div>
-
-    <!-- CAREER POSITIONS -->
-    <div class="container">
-
+<!-- CAREERS -->
+<div class="container">
+    <div class="section">
         <h2>Available Career Paths</h2>
-        <p>Understand roles from beginner to senior level.</p>
+        <p>Explore roles and requirements.</p>
+    </div>
 
-        <div class="career-grid">
+    <div class="career-grid">
 
-            <div class="career-card">
-                <h3>Frontend Developer</h3>
-                <p><strong>Role:</strong> Builds UI interfaces</p>
+        <div class="career-card">
+            <h3>Frontend Developer</h3>
+            <p><strong>Role:</strong> Builds UI interfaces</p>
+            <p><strong>Skills:</strong> HTML, CSS, JS, React</p>
+        </div>
 
-                <h4>Beginner:</h4>
-                <p>HTML, CSS, JavaScript</p>
+        <div class="career-card">
+            <h3>Backend Developer</h3>
+            <p><strong>Role:</strong> Server & database logic</p>
+            <p><strong>Skills:</strong> Node.js, MongoDB, APIs</p>
+        </div>
 
-                <h4>Intermediate:</h4>
-                <p>React, APIs, responsiveness</p>
+        <div class="career-card">
+            <h3>Full-Stack Developer</h3>
+            <p><strong>Role:</strong> Frontend + Backend</p>
+            <p><strong>Skills:</strong> Full system development</p>
+        </div>
 
-                <h4>Senior:</h4>
-                <p>Architecture, performance optimization</p>
-
-                <h4>Requirements:</h4>
-                <p>Portfolio + GitHub</p>
-            </div>
-
-            <div class="career-card">
-                <h3>Backend Developer</h3>
-                <p><strong>Role:</strong> Server & database logic</p>
-
-                <h4>Beginner:</h4>
-                <p>Node.js basics</p>
-
-                <h4>Intermediate:</h4>
-                <p>MongoDB, APIs</p>
-
-                <h4>Senior:</h4>
-                <p>System design & scaling</p>
-
-                <h4>Requirements:</h4>
-                <p>Backend projects</p>
-            </div>
-
-            <div class="career-card">
-                <h3>Full-Stack Developer</h3>
-                <p><strong>Role:</strong> Frontend + Backend</p>
-
-                <h4>Beginner:</h4>
-                <p>HTML, CSS, JS</p>
-
-                <h4>Intermediate:</h4>
-                <p>API integration</p>
-
-                <h4>Senior:</h4>
-                <p>Full system architecture</p>
-
-                <h4>Requirements:</h4>
-                <p>Full-stack projects</p>
-            </div>
-
-            <div class="career-card">
-                <h3>UI/UX Designer</h3>
-                <p><strong>Role:</strong> Product design</p>
-
-                <h4>Beginner:</h4>
-                <p>Figma basics</p>
-
-                <h4>Intermediate:</h4>
-                <p>Wireframes</p>
-
-                <h4>Senior:</h4>
-                <p>User experience strategy</p>
-
-                <h4>Requirements:</h4>
-                <p>Design portfolio</p>
-            </div>
-
+        <div class="career-card">
+            <h3>UI/UX Designer</h3>
+            <p><strong>Role:</strong> Product design</p>
+            <p><strong>Skills:</strong> Figma, UX strategy</p>
         </div>
 
     </div>
+</div>
 
-    <!-- FORM -->
-    <div class="container" id="apply">
+<!-- APPLICATION FORM -->
+<div class="container" id="apply">
+    <div class="section">
         <h2>Job Application Form</h2>
-
-        <form id="jobForm">
-            <input type="text" id="name" placeholder="Full Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="text" id="position" placeholder="Position" required>
-
-            <button type="submit">Submit Application</button>
-            <p id="loading" style="display:none; color:blue;">Submitting application...</p>
-        </form>
     </div>
 
-    <!-- TOAST -->
-    <div id="toast" class="toast"></div>
+    <form id="jobForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="position" placeholder="Position" required>
 
-    <!-- SCRIPT -->
-    <script>
-        // ================= DARK MODE =================
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark");
+        <button type="submit">Submit Application</button>
+        <p id="loading" style="display:none; color:blue;">Submitting application...</p>
+    </form>
+</div>
 
-            if (document.body.classList.contains("dark")) {
-                localStorage.setItem("theme", "dark");
-            } else {
-                localStorage.setItem("theme", "light");
-            }
-        }
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
 
-        // ================= PAGE INIT =================
-        window.addEventListener("load", () => {
+<!-- SCRIPT -->
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
 
-            // theme restore
-            if (localStorage.getItem("theme") === "dark") {
-                document.body.classList.add("dark");
-            }
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+}
 
-            // hide loader
-            const loader = document.getElementById("loader");
-            if (loader) loader.style.display = "none";
+window.addEventListener("load", () => {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+    }
+
+    const loader = document.getElementById("loader");
+    if (loader) loader.style.display = "none";
+});
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+document.getElementById("jobForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const loading = document.getElementById("loading");
+    const button = this.querySelector("button");
+
+    loading.style.display = "block";
+    button.disabled = true;
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        position: document.getElementById("position").value
+    };
+
+    try {
+        await fetch("https://eict-job-portal-backend.onrender.com/apply", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
 
-        // ================= TOAST =================
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.classList.add("show");
+        showToast("Application submitted successfully ✅");
+        this.reset();
 
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 3000);
-        }
+    } catch (err) {
+        showToast("Error submitting application ❌");
+    }
 
-        // ================= FORM SUBMIT =================
-        document.getElementById("jobForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
+    loading.style.display = "none";
+    button.disabled = false;
+});
 
-            const loading = document.getElementById("loading");
-            const button = this.querySelector("button");
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
-            loading.style.display = "block";
-            button.disabled = true;
-
-            const data = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                position: document.getElementById("position").value
-            };
-
-            try {
-                await fetch("https://eict-job-portal-backend.onrender.com/apply", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                showToast("Application submitted successfully ✅");
-                this.reset();
-
-            } catch (err) {
-                showToast("Error submitting application ❌");
-            }
-
-            loading.style.display = "none";
-            button.disabled = false;
-        });
-    </script>
-
-    <!-- FOOTER -->
-    <footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
-        <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
-    </footer>
+<!-- FOOTER -->
+<footer style="text-align:center; padding:20px; margin-top:40px; background:#111; color:white;">
+    <p>© 2026 EICT Job Portal | Built by Emmanuel King Christopher</p>
+</footer>
 
 </body>
 </html>
