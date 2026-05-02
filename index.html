@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>EICT Job Portal</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -34,16 +35,19 @@
 
     <div class="hero-cards">
         <div class="card">
+            <i class="fas fa-briefcase"></i>
             <h3>Apply for Jobs</h3>
             <p>Submit your application quickly and easily.</p>
         </div>
 
         <div class="card">
+            <i class="fas fa-chart-line"></i>
             <h3>Track Opportunities</h3>
             <p>Stay updated with available positions.</p>
         </div>
 
         <div class="card">
+            <i class="fas fa-user-shield"></i>
             <h3>Admin Dashboard</h3>
             <p>Manage applicants efficiently.</p>
         </div>
@@ -217,6 +221,19 @@ document.getElementById("jobForm").addEventListener("submit", async function(e) 
 function toggleMenu() {
     document.getElementById("menu").classList.toggle("show");
 }
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".card, .career-card, .feature-card").forEach(el => {
+    el.classList.add("hidden");
+    observer.observe(el);
+});
 </script>
 
 <!-- FOOTER -->
